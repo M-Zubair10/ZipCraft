@@ -1,10 +1,12 @@
 import argparse
 import logging
 import os
+import sys
 import zipfile
 
-DEFAULT_INCLUDES = ['.py', '.json', '.yaml', '.xml', '.txt', '.md']
+DEFAULT_INCLUDES = ['.py', '.json', '.yaml']
 DEFAULT_EXCLUDES = ['venv', '__pycache__', '.git', '.idea']
+
 
 def add_to_zip(zipf, directory, includes, excludes):
     for root, dirs, files in os.walk(directory):
@@ -20,6 +22,7 @@ def add_to_zip(zipf, directory, includes, excludes):
             else:
                 logging.debug(f"Skipping: {file_path}")
 
+
 def main():
     parser = argparse.ArgumentParser(description="Create a zip archive of selected files and folders.")
     parser.add_argument("path", help="Path to the directory to zip.")
@@ -34,6 +37,11 @@ def main():
     includes = set(args.includes + args.add_includes)
     excludes = set(args.excludes + args.add_excludes)
 
+    print("Includes", includes)
+    print("Excludes", excludes)
+    print("Path", os.path.abspath(args.path))
+    input("Press [Enter] to continue. ")
+
     log_level = logging.DEBUG if args.log == "debug" else logging.INFO
     logging.basicConfig(level=log_level, format="%(levelname)s: %(message)s")
 
@@ -41,6 +49,7 @@ def main():
         add_to_zip(zipf, args.path, includes, excludes)
 
     print(f"Zip file '{args.output}' created successfully.")
+
 
 if __name__ == "__main__":
     main()

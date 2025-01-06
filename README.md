@@ -16,3 +16,8 @@ ZipCraft is a Python script that allows you to selectively create zip archives o
 
    ```sh
    python zipcraft.py /path/to/directory --log debug --excludes venv --includes .py .json .yaml
+
+## Last Run
+```
+py .\zipcraft.py ./.. -e profiles profile .sessions .session debugger "Michel Levy" "puppeteer-integration" ZIPPED datasets Navee extension extensions Versions "Dennis Kardonsky" SpecificScrapingV2 Nameless TopProz
+```
